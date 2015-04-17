@@ -33,7 +33,7 @@ totalDiameter = 2 * (faceRadius + markerRadius)
 marker : Model -> Collage.Form
 marker state =
     let fractionElapsed = state.elapsed / state.total
-        angle = turns fractionElapsed
+        angle = (degrees 90) - (turns fractionElapsed)
         location = fromPolar (faceRadius, angle)
         color = if state.running then Color.black else Color.darkGrey
     in Collage.circle markerRadius
