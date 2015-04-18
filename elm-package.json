@@ -1,0 +1,13 @@
+{
+    "version": "1.0.0",
+    "summary": "timer",
+    "repository": "https://github.com/cayennes/timer.git",
+    "license": "BSD3",
+    "source-directories": [
+        "."
+    ],
+    "exposed-modules": [],
+    "dependencies": {
+        "elm-lang/core": "1.1.1 <= v < 2.0.0"
+    }
+}

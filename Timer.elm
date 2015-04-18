@@ -31,7 +31,7 @@ total : Model -> Time.Time
 total { setTime } =
     case String.toFloat setTime.string of
         Result.Ok i -> i * Time.minute
-        Result.Err e -> 24 * Time.hour
+        Result.Err e -> 12 * Time.hour
 
 -- UPDATE
 
@@ -123,7 +123,7 @@ settings (width, height) state =
         backgroundColor = if finished then base03 else base3
         textStyle =
             Text.Style
-                [ "Source Code Pro" ]
+                [ "Source Code Pro", "Courier New", "monospace" ]
                 (Just 16)
                 (if finished then base00 else base0)
                 False
