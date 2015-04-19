@@ -1,3 +1,5 @@
+module Timer where
+
 import Color
 import Debug
 import Graphics.Collage as Collage
@@ -74,7 +76,14 @@ updates =
        ]
 
 setTimeUpdates : Signal.Channel Field.Content
-setTimeUpdates = Signal.channel Field.noContent
+setTimeUpdates =
+    Signal.channel Field.noContent
+
+port ringBell : Signal Bool
+port ringBell
+    = model
+    |> Signal.map isFinished
+    |> Signal.dropRepeats
 
 -- VIEW
 
@@ -131,7 +140,7 @@ settings (width, height) state =
                 Nothing
         fieldStyle =
             Field.Style
-                (Field.uniformly 4)
+                (Field.uniformly 0)
                 (Field.Outline blue (Field.uniformly 4) 0)
                 Field.noHighlight
                 textStyle

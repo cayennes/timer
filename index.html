@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <title>Timer</title>
+        <script type="text/javascript" src="elm.js"></script>
+    </head>
+
+    <body style="margin:0;">
+        <div id="timer" style="width:100%;height:100%"></div>
+    </body>
+
+    <script type="text/javascript">
+        var timerDiv = document.getElementById('timer');
+        var timer = Elm.embed(Elm.Timer, timerDiv);
+
+        function ring(shouldRing) {
+            if (shouldRing) {
+                new Audio("bell.mp3").play();
+            }
+        }
+
+        timer.ports.ringBell.subscribe(ring);
+    </script>
+</html>
