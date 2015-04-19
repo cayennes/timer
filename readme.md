@@ -2,8 +2,7 @@
 
 This is a timer, because I wanted to learn elm.
 
-Enter number of minutes to time in the box.  The space bar starts or pauses
-(but make sure the entry box isn't selected.)
+Enter number of minutes to time in the box.  The space bar starts or pauses.
 
 If running locally, it must be compiled and acessed via index.html, since
 javascript is used for sound.

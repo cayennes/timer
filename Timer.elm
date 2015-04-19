@@ -1,5 +1,6 @@
 module Timer where
 
+import Char
 import Color
 import Debug
 import Graphics.Collage as Collage
@@ -66,9 +67,13 @@ model =
 
 updates : Signal Update
 updates =
-    let timerRunning = Signal.foldp xor False Keyboard.space
+    let allDigits content = String.all Char.isDigit content.string
+        -- signals
+        timerRunning = Signal.foldp xor False Keyboard.space
         timePassed = Time.fpsWhen 30 timerRunning
-        setTime = Signal.subscribe setTimeUpdates
+        setTime =
+            Signal.subscribe setTimeUpdates
+            |> Signal.keepIf allDigits Field.noContent
     in Signal.mergeMany
        [ (Signal.map TimerState timerRunning)
        , (Signal.map TimeDelta timePassed)
