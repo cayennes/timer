@@ -1,0 +1,22 @@
+machine:
+  ghc:
+    version: 7.8.3
+
+dependencies:
+  cache_directories:
+    - ~/.cabal
+    - elm-stuff/packages
+  override:
+    - cabal install elm-package elm-make
+    - ~/.cabal/bin/elm-package install --yes
+
+test:
+  pre:
+    - ~/.cabal/bin/elm-make --yes Timer.elm
+  override:
+    - echo "there are currently no tests besides whether it compiles (above)"
+
+general:
+  branches:
+    ignore:
+      - gh-pages
