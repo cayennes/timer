@@ -6810,6 +6810,7 @@ Elm.Timer.make = function (_elm) {
    _P = _N.Ports.make(_elm),
    $moduleName = "Timer",
    $Basics = Elm.Basics.make(_elm),
+   $Char = Elm.Char.make(_elm),
    $Color = Elm.Color.make(_elm),
    $Graphics$Collage = Elm.Graphics.Collage.make(_elm),
    $Graphics$Element = Elm.Graphics.Element.make(_elm),
@@ -6907,7 +6908,7 @@ Elm.Timer.make = function (_elm) {
                                ,action._0]],
               model);}
          _U.badCase($moduleName,
-         "between lines 44 and 47");
+         "between lines 45 and 48");
       }();
    });
    var SetTime = function (a) {
@@ -6923,7 +6924,6 @@ Elm.Timer.make = function (_elm) {
              ,_0: a};
    };
    var updates = function () {
-      var setTime = $Signal.subscribe(setTimeUpdates);
       var timerRunning = A3($Signal.foldp,
       $Basics.xor,
       false,
@@ -6931,6 +6931,14 @@ Elm.Timer.make = function (_elm) {
       var timePassed = A2($Time.fpsWhen,
       30,
       timerRunning);
+      var allDigits = function (content) {
+         return A2($String.all,
+         $Char.isDigit,
+         content.string);
+      };
+      var setTime = A2($Signal.keepIf,
+      allDigits,
+      $Graphics$Input$Field.noContent)($Signal.subscribe(setTimeUpdates));
       return $Signal.mergeMany(_L.fromArray([A2($Signal.map,
                                             TimerState,
                                             timerRunning)
@@ -6966,7 +6974,7 @@ Elm.Timer.make = function (_elm) {
                case "Ok":
                return _v6._0 * $Time.minute;}
             _U.badCase($moduleName,
-            "between lines 34 and 36");
+            "between lines 35 and 37");
          }();
       }();
    };
@@ -7019,7 +7027,7 @@ Elm.Timer.make = function (_elm) {
                  face(state)));
               }();}
          _U.badCase($moduleName,
-         "between lines 101 and 103");
+         "between lines 106 and 108");
       }();
    });
    var settings = F2(function (_v13,
@@ -7056,7 +7064,7 @@ Elm.Timer.make = function (_elm) {
                  "set timer")(state.setTime))));
               }();}
          _U.badCase($moduleName,
-         "between lines 131 and 151");
+         "between lines 136 and 156");
       }();
    });
    var view = F2(function (_v17,
@@ -7077,7 +7085,7 @@ Elm.Timer.make = function (_elm) {
                            ,_1: _v17._1},
                            state)]));}
          _U.badCase($moduleName,
-         "between lines 92 and 95");
+         "between lines 97 and 100");
       }();
    });
    var Model = F3(function (a,
