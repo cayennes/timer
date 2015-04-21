@@ -7,6 +7,7 @@ dependencies:
     - ~/.cabal
     - elm-stuff/packages
   override:
+    - cabal update
     - cabal install elm-package elm-make
     - ~/.cabal/bin/elm-package install --yes
 

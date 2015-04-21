@@ -8,7 +8,6 @@ import Graphics.Element as Element
 import Graphics.Input.Field as Field
 import Keyboard
 import Result
-import Signal
 import String
 import Text
 import Time
@@ -72,17 +71,17 @@ updates =
         timerRunning = Signal.foldp xor False Keyboard.space
         timePassed = Time.fpsWhen 30 timerRunning
         setTime =
-            Signal.subscribe setTimeUpdates
-            |> Signal.keepIf allDigits Field.noContent
+            setTimeUpdates.signal
+            |> Signal.filter allDigits Field.noContent
     in Signal.mergeMany
        [ (Signal.map TimerState timerRunning)
        , (Signal.map TimeDelta timePassed)
        , (Signal.map SetTime setTime)
        ]
 
-setTimeUpdates : Signal.Channel Field.Content
+setTimeUpdates : Signal.Mailbox Field.Content
 setTimeUpdates =
-    Signal.channel Field.noContent
+    Signal.mailbox Field.noContent
 
 port ringBell : Signal Bool
 port ringBell
@@ -150,7 +149,7 @@ settings (width, height) state =
                 Field.noHighlight
                 textStyle
     in state.setTime
-       |> Field.field fieldStyle (Signal.send setTimeUpdates) "set timer"
+       |> Field.field fieldStyle (Signal.message setTimeUpdates.address) "set timer"
        |> Element.color backgroundColor
        |> Element.container width height Element.middle 
        |> Element.color backgroundColor
