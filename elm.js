@@ -9731,7 +9731,7 @@ Elm.Timer.make = function (_elm) {
                                ,action._0]],
               model);}
          _U.badCase($moduleName,
-         "between lines 45 and 48");
+         "between lines 46 and 49");
       }();
    });
    var SetTime = function (a) {
@@ -9790,14 +9790,17 @@ Elm.Timer.make = function (_elm) {
    var total = function (_v4) {
       return function () {
          return function () {
-            var _v6 = $String.toFloat(_v4.setTime.string);
-            switch (_v6.ctor)
-            {case "Err":
-               return 12 * $Time.hour;
-               case "Ok":
-               return _v6._0 * $Time.minute;}
-            _U.badCase($moduleName,
-            "between lines 35 and 37");
+            var $default = 12 * $Time.hour;
+            return function () {
+               var _v6 = $String.toFloat(_v4.setTime.string);
+               switch (_v6.ctor)
+               {case "Err": return $default;
+                  case "Ok": switch (_v6._0)
+                    {case 0: return $default;}
+                    return _v6._0 * $Time.minute;}
+               _U.badCase($moduleName,
+               "between lines 35 and 38");
+            }();
          }();
       }();
    };
@@ -9850,7 +9853,7 @@ Elm.Timer.make = function (_elm) {
                  face(state)));
               }();}
          _U.badCase($moduleName,
-         "between lines 106 and 108");
+         "between lines 107 and 109");
       }();
    });
    var settings = F2(function (_v13,
@@ -9887,7 +9890,7 @@ Elm.Timer.make = function (_elm) {
                  "set timer")(state.setTime))));
               }();}
          _U.badCase($moduleName,
-         "between lines 136 and 156");
+         "between lines 137 and 157");
       }();
    });
    var view = F2(function (_v17,
@@ -9908,7 +9911,7 @@ Elm.Timer.make = function (_elm) {
                            ,_1: _v17._1},
                            state)]));}
          _U.badCase($moduleName,
-         "between lines 97 and 100");
+         "between lines 98 and 101");
       }();
    });
    var Model = F3(function (a,
