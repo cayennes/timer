@@ -31,9 +31,11 @@ isFinished state =
 
 total : Model -> Time.Time
 total { setTime } =
-    case String.toFloat setTime.string of
+    let default = 12 * Time.hour
+    in case String.toFloat setTime.string of
+        Result.Ok 0 -> default
         Result.Ok i -> i * Time.minute
-        Result.Err e -> 12 * Time.hour
+        Result.Err e -> default
 
 -- UPDATE
 
